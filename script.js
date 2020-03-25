@@ -36,6 +36,23 @@ function checkRquired(inputArr) {
   });
 }
 
+// Check input length
+function checkLenght(input, min, max) {
+  if (input.value.length < min) {
+    showError(
+      input,
+      `${getFieldName(input)} must be at least ${min} characters`
+    );
+  } else if (input.value.length > max) {
+    showError(
+      input,
+      `${getFieldName(input)} must be less than ${max} characters`
+    );
+  } else {
+    showSuccess(input);
+  }
+}
+
 function getFieldName(input) {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
@@ -45,4 +62,6 @@ form.addEventListener('submit', function(e) {
   e.preventDefault();
 
   checkRquired([username, email, password, password2]);
+  checkLenght(username, 3, 20);
+  checkLenght(password, 6, 20);
 });
